@@ -1,0 +1,21 @@
+{
+  "name": "node-api",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scotch-io/node-token-authentication"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Chris Sevilleja <scotch.io>",
+  "license": "MIT",
+  "dependencies": {
+    "seneca": "~2.0.0",
+    "seneca-entity": "0.0.1",
+    "node-uuid": "~1.4.7",
+    "seneca-mysql-store": "*",
+    "express": "~4.11.2",
+    "body-parser": "~1.5.2"
+  }
+}
