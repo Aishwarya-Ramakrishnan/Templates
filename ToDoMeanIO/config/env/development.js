@@ -1,7 +1,8 @@
 'use strict';
-
+var nodeStarterConfig=require('../../node_starter_kit_environment_parser');
+var env=nodeStarterConfig.getEnv();
 module.exports = {
-  db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/mean-dev',
+  db: env.url,
   debug: true,
   logging: {
     format: 'tiny'

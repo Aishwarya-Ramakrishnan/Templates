@@ -2,7 +2,9 @@
 
 var path = require('path'),
   rootPath = path.normalize(__dirname + '/../..');
-var creds = JSON.parse(process.env.VCAP_SERVICES)['mongodb-2.4'][0]['credentials'];
+
+var nodeStarterConfig=require('../../node_starter_kit_environment_parser');
+var env=nodeStarterConfig.getEnv();
 module.exports = {
   root: rootPath,
   http: {
@@ -19,7 +21,7 @@ module.exports = {
     }
   },
   hostname: process.env.HOST || process.env.HOSTNAME,
-  db: creds.url,
+  db: env.url,
   templateEngine: 'swig',
 
   // The secret should be set to a non-guessable string that

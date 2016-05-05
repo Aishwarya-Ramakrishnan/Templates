@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.myTheme').factory('Todos', [
+angular.module('mean.toDo').factory('Todos', [
   '$http',function($http) {
     return {
       get : function() {

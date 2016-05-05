@@ -1,8 +1,8 @@
 'use strict';
-var creds = JSON.parse(process.env.VCAP_SERVICES)['mongodb-2.4'][0]['credentials'];
-
+var nodeStarterConfig=require('../../node_starter_kit_environment_parser');
+var env=nodeStarterConfig.getEnv();
 module.exports = {
-  db: creds.url,
+  db: env.url,
   /**
    * Database options that will be passed directly to mongoose.connect
    * Below are some examples.

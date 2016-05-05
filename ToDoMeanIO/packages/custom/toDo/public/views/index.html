@@ -1,0 +1,105 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="mean.toDo">
+<head>
+  <!-- META -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+  <title>Node/Angular Todo App</title>
+
+  <!-- SCROLLS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <style>
+    html 					{ overflow-y:scroll; }
+    body 					{ padding-top:50px; }
+    #todo-list 				{ margin-bottom:30px; }
+    #todo-form 	 			{ margin-bottom:50px; }
+    .margin-top {
+      margin-top:45px;
+    }
+    .margin-top-small {
+      margin-top:25px;
+    }
+    .width{
+      width:400px;
+    }
+    .margin-left {
+      margin-left:65px;
+    }
+    .margin-leftsmall {
+      margin-left:55px;
+    }
+    .margin-right{
+      margin-left:-100px;
+    }
+    .size
+    {
+      margin-left:5px;
+      margin-bottom: 50px;
+      font-size: 30px;
+      background: #428bca;
+    }
+    #grad1 {
+      background: #cde6e6; /* For browsers that do not support gradients */
+      background: -webkit-linear-gradient(to bottom right,lightblue, white); /* For Safari 5.1 to 6.0 */
+      background: -o-linear-gradient(to bottom right,lightblue, white); /* For Opera 11.1 to 12.0 */
+      background: -moz-linear-gradient(to bottom right,lightblue, white); /* For Firefox 3.6 to 15 */
+      background: linear-gradient(to bottom , #e0fff8, white); /* Standard syntax (must be last) */
+    }
+  </style>
+
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="ToDoController">
+<div class="container" ng-controller="ToDoController">
+
+  <!-- HEADER AND TODO COUNT -->
+  <div class="page-header" >
+    <h1>To do List <span class="badge size"> {{ todos.length }}</span></h1>
+  </div>
+
+  <!-- FORM TO CREATE TODOS -->
+  <div id="todo-form" class="row" >
+    <div class="col-sm-8 col-sm-offset-4 text-center" >
+      <form>
+        <div class="form-group">
+          <div class="input-group width">
+            <input type="text" class="form-control margin-top  text-center" placeholder="Add to do" ng-model="formData.text">
+            <span class="input-group-btn">
+            <button class="btn btn-primary margin-top" type="submit" ng-click="createTodo()">+</button>
+            </span>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- TODO LIST -->
+  <div id="todo-list" class="row">
+    <div  class="col-sm-4 col-sm-offset-4 margin-top" >
+
+      <!-- LOOP OVER THE TODOS IN $scope.todos -->
+
+      <div class="checkbox margin-leftsmall" ng-repeat="todo in todos">
+          <label >
+            <input class ="margin-right" type="checkbox"   ng-click="deleteTodo(todo._id)"> <b>{{ todo.text }}</b>
+          </label>
+      </div>
+
+      <p class="text-center" ng-show="loading">
+        <span class="fa fa-spinner fa-spin fa-3x"></span>
+      </p>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
