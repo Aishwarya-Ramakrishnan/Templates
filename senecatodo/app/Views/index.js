@@ -18,11 +18,16 @@ var SimpleListModel = function(items) {
             url: '/api/todos',
             type: 'DELETE',
             data: {'text':task.taskname},//{'text':task},
+            async: false,
             //data: this.itemToAdd(),
             success: function(result) {
                 // Do something with the result
                 //ko.applyBindings(new SimpleListModel(getData()));
-                alert( "Deleted Successfully" );
+                //alert( "Deleted Successfully" );
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                this.itemToAdd("");
+                return;
             }
         });
         var index = this.items.indexOf(task);
@@ -34,11 +39,25 @@ var SimpleListModel = function(items) {
         if (this.itemToAdd() != "") {
 
             var mydata = {'text':this.itemToAdd()};
-            //var url =  '/api/todos'
-            $.post( "/api/todos",mydata, function(data) {
-                alert( "Added Successfully" );
-            });
 
+            $.ajax({
+                //url: 'http://senecasample.cfapps.io/api/todos',
+                url: '/api/todos',
+                type: 'POST',
+                data: mydata,//{'text':task},
+                async: false,
+                success: function(result) {
+                    //alert(result);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    this.itemToAdd("");
+                    return;
+                }
+            });
+            //var url =  '/api/todos'
+            //$.post( "/api/todos",mydata, function(data) {
+            //    alert( "Added Successfully" );
+            //});
             this.items.push(new TaskItem(this.itemToAdd()));
             //this.items.push(this.itemToAdd()); // Adds the item. Writing to the "items" observableArray causes any associated UI to update.
             this.itemToAdd(""); // Clears the text box, because it's bound to the "itemToAdd" observable

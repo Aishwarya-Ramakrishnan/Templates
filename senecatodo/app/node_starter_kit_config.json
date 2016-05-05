@@ -1,0 +1,4 @@
+{
+  "service_name":"cleardb",
+  "deployment_target":"pcf"
+}

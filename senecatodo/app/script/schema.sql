@@ -1,4 +1,3 @@
-/* Copyright (c) 2012 Mircea Alexandru */
 /* execute using mysql -u root < dbschema.sql */
 
 DROP DATABASE IF EXISTS senecatest;

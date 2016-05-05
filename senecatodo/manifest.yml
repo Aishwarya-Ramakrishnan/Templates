@@ -2,7 +2,9 @@ applications:
 - path: .
   memory: 128M
   instances: 1
-  name: senecasample
-  host: senecasample
+  name: seneca
+  host: seneca
   disk_quota: 1024M
   buildpack: nodejs_buildpack
+  services:
+  - sqlstore

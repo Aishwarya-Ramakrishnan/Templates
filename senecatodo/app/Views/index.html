@@ -2,80 +2,63 @@
 <html>
 <head lang="en">
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <!-- Javascript -->
-    <script src="js/head.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="style.css">
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 
 <body>
-<div id="top">
-    <h1>To-Do Application</h1>
+
+<div class="container" id="main-container">
+    <!--<button data-bind="click: makeRequestOne, loading: isOneBusy">Make Request 1</button>-->
+
+    <div id="headertodo" class="page-header text-center" >
+        <h1>To Do List <span class="badge size" data-bind="text: items().length"></span></h1>
+        <!--<h1>To Do List <span class="label label-info" data-bind="text: items().length"></span></h1>-->
+    </div>
+
+    <div id="todo-form" class="row">
+        <div class="col-sm-8 col-sm-offset-4 text-center">
+            <form data-bind="submit: addItem">
+                <div class="form-group">
+                    <div class="input-group width">
+                        <input type="text" class="form-control margin-top text-center" placeholder="To do List" data-bind='value: itemToAdd, valueUpdate: "afterkeydown"'>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary margin-top " data-bind="enable: itemToAdd().length > 0">+</button>
+                    </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TODO LIST -->
+    <div id="todo-list" class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+
+
+            <div class="checkbox" data-bind="foreach: items">
+                <div class="row margin-top-small">
+                    <label>
+                        <button class="btn btn-xs btn-warning pull-left bgColor" data-bind="click: $root.removeTask"> <span class="glyphicon glyphicon-trash blue"></span></button>
+
+                        <!--<input type="checkbox" class="margin-right" data-bind="click: $root.removeTask" >-->
+                        <span class="task-name margin-right" data-bind="text: taskname"></span><br>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
-<div id="main-container">
 
-    <!-- Input Container where new tasks can be added -->
-    <section id="input-container">
-        <form data-bind="submit: addItem">
-            <input type="text" name="task-input" id="task-input" data-bind='value: itemToAdd, valueUpdate: "afterkeydown"' />
-            <!--<input type="text" name="task-input" id="task-input" data-bind="value: newTask"/>-->
-            <input type="submit" data-bind="enable: itemToAdd().length > 0" value="add task!">
-        </form>
-            <h2>Tasks</h2>
-
-
-
-    </section>
-
-    <section id="task-container">
-
-        <ul class="task-list" data-bind="foreach: items">
-            <li>
-
-                <span class="task-name" data-bind="text: taskname"></span>
-
-                <a href="javascript:void(0)" data-bind="click: $root.removeTask">X</a> </article>
-
-            </li>
-        </ul>
-
-        <!--<select class="task-name" multiple="multiple" width="50" data-bind="options: items"></select>-->
-        <!--<ul class="task-list" data-bind="foreach: items">-->
-            <!--<li class="task-name">-->
-        <!--&lt;!&ndash;<article class="task animated setup" data-bind=" css: { completed: completion() == true}">&ndash;&gt;-->
-                <!--&lt;!&ndash;<form data-bind="click: $root.removeTask">&ndash;&gt;-->
-            <!--<span class="task-name" data-bind="text: taskname"></span>-->
-                <!--&lt;!&ndash;<a href="javascript:void(0)" class="task-remove" data-bind="enable: taskname()">X</a> </article>&ndash;&gt;-->
-                <!--&lt;!&ndash;</form>&ndash;&gt;-->
-        <!--&lt;!&ndash;</article>&ndash;&gt;-->
-                <!--&lt;!&ndash;<form data-bind="delete: deleteItem">&ndash;&gt;-->
-                <!--&lt;!&ndash;<form data-bind="submit: removeTask(taskname)">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<input type="submit" class="task-remove" value="Delete task!">&ndash;&gt;-->
-                <!--&lt;!&ndash;</form>&ndash;&gt;-->
-                    <!--<a href="javascript:void(0)" data-bind="click: $root.removeTask">X</a> </article>-->
-                    <!--&lt;!&ndash;<a href="javascript:void(0)" class="task-remove" data-bind="click: $root.removeTask">X</a> </article>&ndash;&gt;-->
-                <!--&lt;!&ndash;<button>delete</button>&ndash;&gt;-->
-
-                <!--&lt;!&ndash;</form>&ndash;&gt;-->
-            <!--</li>-->
-        <!--</ul>-->
-
-
-        <!--<a href="#" id="saving" data-bind="click: saveState, text: saveText">save</a>-->
-        <!--<div class="task-list" data-bind="foreach: tasks">-->
-            <!--<article class="task animated setup" data-bind=" css: { completed: completion() == true}"> <a href="javascript:void(0)"class="checkbox" data-bind="click: completeTask, html: completeContent"></a><span class="task-name" data-bind="text: task"></span> <span class="task-date" data-bind="text: date"></span> <a href="javascript:void(0)" class="task-remove" data-bind="click: $root.removeTask">X</a> </article>-->
-        <!--</div>-->
-    </section>
-</div>
-<!--<form data-bind="submit: addItem">-->
-    <!--New item:-->
-    <!--<input data-bind='value: itemToAdd, valueUpdate: "afterkeydown"' />-->
-    <!--<button type="submit" data-bind="enable: itemToAdd().length > 0">Add</button>-->
-    <!--<p>Your items:</p>-->
-    <!--<select multiple="multiple" width="50" data-bind="options: items"> </select>-->
-<!--</form>-->
 <script src="index.js"></script>
 </body>
 </html>
