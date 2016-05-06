@@ -1,4 +1,4 @@
 {
-  "service_name":"mongolab",
-  "deployment_target":"pcf"
+  "service_name":"mongodb-2.4",
+  "deployment_target":"bluemix"
 }
